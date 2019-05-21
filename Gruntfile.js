@@ -5,7 +5,7 @@ module.exports = function (grunt) {
         options: {
           watch: true,
           transform: [
-            ['babelify', {presets: ['@babel/preset-env'], plugins: []}],
+            ['babelify', {presets: ['@babel/preset-env'], plugins: ['@babel/plugin-transform-runtime']}],
           ]
         },
         files: {
@@ -36,5 +36,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.registerTask('default', ['watch']);
-  grunt.registerTask('build', ['browserify', 'uglify']);
+  // grunt.registerTask('build', ['browserify', 'uglify']);
+  grunt.registerTask('build', ['browserify']);
 };
