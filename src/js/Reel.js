@@ -27,7 +27,7 @@ class Reel extends Container {
   }
 
   spin(data) {
-    this._buffer.spin(data);
+    return this._buffer.spin(data);
   }
 
   getTilePos(offset){

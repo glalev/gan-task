@@ -25,22 +25,24 @@ class ReelBuffer extends Container{ // todo extend just event emiter
   }
 
   spin(data) {
-    const flatten = data.reduce((arr, subArr) => arr.concat(subArr), []);
-    const target = data[0].length;
-    const end = this.current + this._cfg.tiles.visible + this._cfg.tiles.offset;
-    const rest = this.data.slice(0, end);
+    return new Promise((resolve) => {
+      const flatten = data.reduce((arr, subArr) => arr.concat(subArr), []);
+      const target = data[0].length;
+      const end = this.current + this._cfg.tiles.visible + this._cfg.tiles.offset;
+      const rest = this.data.slice(0, end);
 
-    this.current = this.current + flatten.length;
-    this.data = flatten.concat(rest);
+      this.current = this.current + flatten.length;
+      this.data = flatten.concat(rest);
 
-    const distance = this.current - target;
-    const time = distance / this._cfg.spin.speed;
-    const preTarget = this.current + 0.5;
+      const distance = this.current - target;
+      const time = distance / this._cfg.spin.speed;
+      const preTarget = this.current + 0.5;
 
-    this._timeLine
-      .to(this, 1, { current: preTarget, ease: Power1.easeOut })
-      .to(this, time, { current: target - 0.5, ease: Power1.easeOut })
-      .to(this, 0.5, { current: target, ease: Power1.easeIn })
+      this._timeLine
+        .to(this, 1, { current: preTarget, ease: Power1.easeOut })
+        .to(this, time, { current: target - 0.5, ease: Power1.easeOut })
+        .to(this, 0.5, { current: target, ease: Power1.easeIn, onComplete: resolve });
+    })
   }
 
   static get events () {

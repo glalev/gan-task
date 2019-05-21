@@ -50,7 +50,9 @@ class Reels extends Container {
 
   spin(data = MOCK_DATA) {
     if (data.length !== this._reels.length) return console.error('Wrong spin data');
-    const promises = data.map((entry, i) => this._reels[i].spin(entry));
+    const promises = data.map((entry, i) => {
+      return this._reels[i].spin(entry);
+    });
 
     return Promise.all(promises);
   }
