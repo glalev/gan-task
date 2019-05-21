@@ -26,10 +26,18 @@ class Reel extends Container {
     this._buffer.on('update', () => this._render12());
   }
 
-  spin() {
-    this._buffer.spin();
-
+  spin(data) {
+    this._buffer.spin(data);
   }
+
+  getTilePos(offset){
+    const baseIndex = this._cfg.tiles.offset;
+    const y =  this.y + this._tiles[baseIndex + offset].y;
+    const x =  this.x + this._tiles[baseIndex + offset].x;
+
+    return { x, y };
+  }
+
   _render12() {
     const baseIndex = this._cfg.tiles.offset;
     const currentIndex = Math.floor(this._buffer.current);

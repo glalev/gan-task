@@ -24,7 +24,7 @@ class ReelBuffer extends Container{ // todo extend just event emiter
     this.data = data.reduce((arr, subArr) => arr.concat(subArr), []);
   }
 
-  spin(data = [[1,1,1],[9,10,2],[3,3,3]]) {
+  spin(data) {
     const flatten = data.reduce((arr, subArr) => arr.concat(subArr), []);
     const target = data[0].length;
     const end = this.current + this._cfg.tiles.visible + this._cfg.tiles.offset;

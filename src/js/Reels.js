@@ -8,6 +8,13 @@ const DEFAULT_CONFIG = {
     height: 504,
   }
 };
+const MOCK_DATA = [
+  [[1,1,1],[9,10,2],[3,3,3]],
+  [[1,3,10],[10,10,1],[3,3,3]],
+  [[1,3,2],[5,10,4],[3,3,3]],
+  [[1,5,1],[4,10,2],[3,3,3]],
+];
+
 
 class Reels extends Container {
   constructor(config = DEFAULT_CONFIG) {
@@ -28,6 +35,10 @@ class Reels extends Container {
     this.y = 100;
   }
 
+  reel(index) {
+    return this._reels[index];
+  }
+
   static initReels({ count, width, padding }) {
     return new Array(count).fill(0).map((_, i) => {
       const reel = new Reel();
@@ -37,8 +48,11 @@ class Reels extends Container {
     });
   }
 
-  spin(data) {
-    
+  spin(data = MOCK_DATA) {
+    if (data.length !== this._reels.length) return console.error('Wrong spin data');
+    const promises = data.map((entry, i) => this._reels[i].spin(entry));
+
+    return Promise.all(promises);
   }
 }
 
