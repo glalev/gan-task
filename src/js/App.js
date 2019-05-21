@@ -4,7 +4,6 @@ import Assets from './Assets';
 import Game from './Game';
 import Tile from './Tile';
 import Reel from './Reel';
-// import LoadingScreen from './LoadingScreen'
 
 class App {
   constructor(container) {
@@ -13,12 +12,6 @@ class App {
     this._game = null;
     container.appendChild(this._renderer.view);
     PIXI.Ticker.shared.add(() => this._renderer.render(this._stage));
-
-    window.app = this; //todo delete
-    window.PIXI = PIXI; //todo delete
-    window.Assets = Assets; //todo delete
-    window.Tile = Tile; //todo delete
-    window.Reel = Reel; //todo delete
   }
 
   init() {
