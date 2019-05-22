@@ -2,15 +2,15 @@ import { Container } from 'pixi.js'
 import WinTile from './WinTile';
 
 class WinTiles extends Container {
-  constructor(reels) {
+  constructor(reels, x, y) {
     super();
     this._reels = reels;
     this._winTiles = WinTiles.intiWinTiles(reels);
 
     const sprites  = this._winTiles.reduce((arr, subArr) => arr.concat(subArr), []);
     this.addChild(...sprites);
-    this.x = 200;
-    this.y = 100;
+    this.x = x;
+    this.y = y;
   }
 
   show(lines = [[1,1,0],[0,1,0],[0,1,0],[0,1,0]]) {

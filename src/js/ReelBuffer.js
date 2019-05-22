@@ -8,7 +8,6 @@ const events = {
 class ReelBuffer extends Container{ // todo extend just event emiter
   constructor(config, data = []) {
     super();
-    console.log(data);
     this._timeLine = new TimelineMax({ onUpdate: () => this.emit('update') });
     this._cfg = config;
     this.current = data[0].length;

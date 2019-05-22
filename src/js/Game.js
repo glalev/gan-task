@@ -11,9 +11,9 @@ class Game extends Container {
     super();
     this._server = new MockServer();
     this._background = new Sprite(Assets.images.background);
-    this._reels = new Reels(Config.reels, this._server.settings());
-    this._winTiles = new WinTiles(this._reels);
-    this._spinButton = new Button({ x: 1000, y: 300, click: ()=> this._spin() });
+    this._reels = new Reels(Config.reels, this._server.settings(), 400, 100);
+    this._winTiles = new WinTiles(this._reels, 400, 100);
+    this._spinButton = new Button({ x: 1200, y: 300, click: () => this._spin() });
 
 
     this.addChild(this._background, this._reels, this._winTiles, this._spinButton);

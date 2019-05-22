@@ -2,7 +2,7 @@ import { Container, Graphics } from 'pixi.js'
 import Reel from './Reel';
 
 class Reels extends Container {
-  constructor(config, data) {
+  constructor(config, data, x, y) {
     super();
     this._reels = Reels.initReels(config, data);
     this.addChild(...this._reels);
@@ -16,8 +16,8 @@ class Reels extends Container {
     this.addChild(mask);
     this.mask = mask;
 
-    this.x = 200;
-    this.y = 100;
+    this.x = x;
+    this.y = y;
   }
 
   reel(index) {
