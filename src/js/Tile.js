@@ -13,14 +13,9 @@ const IDS_MAP = {
   9: 'symbol_crow',
   10: 'symbol_rifle',
 }
-const DEFAULT_CONFIG = {
-  ids: [1,2,3,4,5,6,7,8,9,10],
-  width: 168,
-  height: 168,
-};
 
 class Tile extends Container {
-  constructor(config = DEFAULT_CONFIG) {
+  constructor(config) {
     super();
     this._sprites = Tile.initSpites(config)
   }

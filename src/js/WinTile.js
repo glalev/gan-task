@@ -1,14 +1,6 @@
-import { Container, Sprite, Graphics } from 'pixi.js'
+import { Sprite } from 'pixi.js'
 import Assets from './Assets';
-import { Power1, Power2, TweenMax } from "gsap/TweenMax";
-
-const DEFAULT_CONFIG = {
-  tiles: {
-    count: 7,
-    visible: 3,
-    offset: 2
-  },
-};
+import { Power2, TweenMax } from "gsap/TweenMax";
 
 class WinTile extends Sprite {
   constructor({ texture = 'winframe', x, y } = {}) {

@@ -1,26 +1,14 @@
 import { Container, Sprite } from 'pixi.js'
 import Assets from './Assets';
-import { Power1, Power2, TimelineMax } from "gsap/TweenMax";
+import { Power1, TimelineMax } from "gsap/TweenMax";
 
-const DEFAULT_CONFIG = {
-  tiles: {
-    count: 7,
-    visible: 3,
-    offset: 2,
-    ids: [1,2,3,4,5,6,7,8,9,10],
-    width: 168,
-    height: 168,
-  },
-  spin: {
-    speed: 5, // tiles per second
-  }
-};
 const events = {
   UPDATE: 'update'
 }
 class ReelBuffer extends Container{ // todo extend just event emiter
-  constructor(data = [], config = DEFAULT_CONFIG) {
+  constructor(config, data = []) {
     super();
+    console.log(data);
     this._timeLine = new TimelineMax({ onUpdate: () => this.emit('update') });
     this._cfg = config;
     this.current = data[0].length;

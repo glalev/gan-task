@@ -1,4 +1,4 @@
-import * as PIXI from 'pixi.js'
+import { Container, autoDetectRenderer, Ticker, Loader } from 'pixi.js'
 import manifest from './config/manifest';
 import Assets from './Assets';
 import Game from './Game';
@@ -7,11 +7,12 @@ import Reel from './Reel';
 
 class App {
   constructor(container) {
-    this._stage = new PIXI.Container();
-    this._renderer = PIXI.autoDetectRenderer({ width: 1710, height: 801 });
+    this._stage = new Container();
+    this._renderer = autoDetectRenderer({ width: 1710, height: 801 });
     this._game = null;
+
     container.appendChild(this._renderer.view);
-    PIXI.Ticker.shared.add(() => this._renderer.render(this._stage));
+    Ticker.shared.add(() => this._renderer.render(this._stage));
   }
 
   init() {
@@ -21,7 +22,7 @@ class App {
 
   load() {
     return new Promise(resolve => {
-      const loader = new PIXI.Loader();
+      const loader = new Loader();
 
       manifest.spriteSheets.forEach(({id, src})  => loader.add(id, src));
       loader.load((loader, resources) => {

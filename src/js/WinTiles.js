@@ -1,24 +1,8 @@
-import { Container, Sprite, Graphics } from 'pixi.js'
-import Assets from './Assets';
+import { Container } from 'pixi.js'
 import WinTile from './WinTile';
 
-const DEFAULT_CONFIG = {
-  tiles: {
-    count: 7,
-    visible: 3,
-    offset: 2
-  },
-};
-const MOCK_DATA = [
-  [[1,1,1],[9,10,2],[3,3,3]],
-  [[1,3,10],[10,10,1],[3,3,3]],
-  [[1,3,2],[5,10,4],[3,3,3]],
-  [[1,5,1],[4,10,2],[3,3,3]],
-];
-
-
 class WinTiles extends Container {
-  constructor(reels, config = DEFAULT_CONFIG) {
+  constructor(reels) {
     super();
     this._reels = reels;
     this._winTiles = WinTiles.intiWinTiles(reels);

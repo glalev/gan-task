@@ -1,30 +1,15 @@
-import { Container, Sprite, Graphics } from 'pixi.js'
+import { Container, Graphics } from 'pixi.js'
 import Reel from './Reel';
-const DEFAULT_CONFIG = {
-  reels: {
-    count: 4,
-    padding: 20,
-    width: 168,
-    height: 504,
-  }
-};
-const MOCK_DATA = [
-  [[1,1,1],[9,10,2],[3,3,3]],
-  [[1,3,10],[10,10,1],[3,3,3]],
-  [[1,3,2],[5,10,4],[3,3,3]],
-  [[1,5,1],[4,10,2],[3,3,3]],
-];
-
 
 class Reels extends Container {
-  constructor(config = DEFAULT_CONFIG) {
+  constructor(config, data) {
     super();
-    this._reels = Reels.initReels(config.reels);
+    this._reels = Reels.initReels(config, data);
     this.addChild(...this._reels);
 
     const mask = new Graphics();
-    const maskWidth = config.reels.count * config.reels.width + (config.reels.count - 1) * config.reels.padding;
-    const maskHeight = +config.reels.height;
+    const maskWidth = config.count * config.width + (config.count - 1) * config.padding;
+    const maskHeight = config.height;
     mask.beginFill(0);
     mask.drawRect(0, 0, maskWidth, maskHeight);
 
@@ -39,16 +24,17 @@ class Reels extends Container {
     return this._reels[index];
   }
 
-  static initReels({ count, width, padding }) {
+  static initReels(config, data) {
+    const { count, width, padding } = config;
     return new Array(count).fill(0).map((_, i) => {
-      const reel = new Reel();
+      const reel = new Reel(config, data[i]);
       reel.x = i * width + padding * i
 
       return reel;
     });
   }
 
-  spin(data = MOCK_DATA) {
+  spin(data) {
     if (data.length !== this._reels.length) return console.error('Wrong spin data');
     const promises = data.map((entry, i) => {
       return this._reels[i].spin(entry);

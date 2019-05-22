@@ -1,29 +1,19 @@
-import { Container, Sprite } from 'pixi.js'
-import Assets from './Assets';
+import { Container } from 'pixi.js'
 import ReelBuffer from './ReelBuffer';
 import Tile from './Tile';
-const DEFAULT_CONFIG = {
-  tiles: {
-    count: 7,
-    visible: 3,
-    offset: 2
-  },
-  width: 168,
-  height: 504,
-};
 
 class Reel extends Container {
-  constructor(config = DEFAULT_CONFIG) {
+  constructor(config, data) {
     super();
-    this._buffer = new ReelBuffer([[1,2,2],[4,5,1],[7,8,9]]);
+    this._buffer = new ReelBuffer(config, data);
     this._tiles = Reel.initTiles(config.tiles);
     this._tilesIndexes = [2,1,0,3,4,5,6]; // todo add a function that calculates these
     this._cfg = config;
 
     this.addChild(...this._tiles);
-    this._render12();
+    this._renderTiles();
 
-    this._buffer.on('update', () => this._render12());
+    this._buffer.on('update', () => this._renderTiles());
   }
 
   spin(data) {
@@ -38,7 +28,7 @@ class Reel extends Container {
     return { x, y };
   }
 
-  _render12() {
+  _renderTiles() {
     const baseIndex = this._cfg.tiles.offset;
     const currentIndex = Math.floor(this._buffer.current);
 
@@ -49,9 +39,7 @@ class Reel extends Container {
 
       tile.to(id);
 
-      if (index === baseIndex) {
-        tile.y = 0;
-      } else if(index < baseIndex) {
+      if(index < baseIndex) {
         const previous = this._tiles[index + 1];
         tile.y = previous.y - tile.height;
       } else if (index > baseIndex){
@@ -64,9 +52,9 @@ class Reel extends Container {
     });
   }
 
-  static initTiles({ count }) {
-    return new Array(count).fill(0).map((_, i) => {
-      return new Tile();
+  static initTiles(config) {
+    return new Array(config.count).fill(0).map((_, i) => {
+      return new Tile(config);
     });
   }
 }
