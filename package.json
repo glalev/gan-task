@@ -4,7 +4,8 @@
   "description": "Simple environment for testing tuna.js web audio effects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "grunt build; ./node_modules/.bin/http-server ./"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "grunt-contrib-uglify": "^4.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "handlebars": "^4.0.12",
-    "hbsfy": "^2.8.1"
+    "hbsfy": "^2.8.1",
+    "http-server": "^0.11.1"
   }
 }
